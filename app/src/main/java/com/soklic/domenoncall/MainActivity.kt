@@ -1,9 +1,10 @@
 package com.soklic.domenoncall
 
+import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.Response
@@ -19,6 +20,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        configButton.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
@@ -28,7 +34,8 @@ class MainActivity : AppCompatActivity() {
             val context = this@MainActivity
 
             val queue = Volley.newRequestQueue(context)
-            val url = "http://192.168.1.15:5000/"
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
+            val url = sharedPreferences.getString("serverUrl", null)
 
             val response = StringRequest(Request.Method.GET, url,
                     Response.Listener<String> {
@@ -37,10 +44,10 @@ class MainActivity : AppCompatActivity() {
                         context.runOnUiThread {
                             if (zoomInProgress) {
                                 centerText.rootView.setBackgroundColor(Color.RED)
-                                centerText.text = "Do not disturb"
+                                centerText.text = getString(R.string.busy)
                             } else {
                                 centerText.rootView.setBackgroundColor(Color.GREEN)
-                                centerText.text = "Available"
+                                centerText.text = getString(R.string.available)
                             }
                         }
                     },

@@ -17,4 +17,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/configButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:drawableLeft="@android:drawable/ic_menu_manage"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="11dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
