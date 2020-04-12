@@ -21,9 +21,11 @@
         android:id="@+id/configButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="11dp"
         android:background="#00FFFFFF"
         android:drawableLeft="@android:drawable/ic_menu_manage"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="11dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
