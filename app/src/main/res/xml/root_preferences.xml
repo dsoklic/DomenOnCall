@@ -3,11 +3,11 @@
 
     <PreferenceCategory app:title="@string/server_header"/>
     <EditTextPreference
-        android:defaultValue="http://192.168.1.15:5000/"
         android:key="serverUrl"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="Server URL"
+        android:defaultValue="@string/url_default"
         app:useSimpleSummaryProvider="true" />
 
 </PreferenceScreen>

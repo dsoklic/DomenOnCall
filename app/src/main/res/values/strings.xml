@@ -7,4 +7,5 @@
     <string name="signature_title">Server URL</string>
     <string name="busy">Call in progress</string>
     <string name="available">Available</string>
+    <string name="url_default">http://192.168.1.15:5000/</string>
 </resources>

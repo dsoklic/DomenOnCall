@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(context)
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
-            val url = sharedPreferences.getString("serverUrl", null)
+            val url = sharedPreferences.getString("serverUrl", getString(R.string.url_default))
 
             val response = StringRequest(Request.Method.GET, url,
-                    Response.Listener<String> {
+                    Response.Listener {
                         val zoomInProgress = it.toBoolean()
 
                         context.runOnUiThread {
