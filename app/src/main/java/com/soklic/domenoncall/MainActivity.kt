@@ -24,8 +24,7 @@ class MainActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         configButton.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 
@@ -33,13 +32,15 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         timer = fixedRateTimer("timer", false, 0, 5000) {
-            val context = this@MainActivity
+            try {
+                val context = this@MainActivity
 
-            val queue = Volley.newRequestQueue(context)
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
-            val url = sharedPreferences.getString("serverUrl", getString(R.string.url_default))
+                val queue = Volley.newRequestQueue(context)
+                val sharedPreferences =
+                    PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
+                val url = sharedPreferences.getString("serverUrl", getString(R.string.url_default))
 
-            val response = StringRequest(Request.Method.GET, url,
+                val response = StringRequest(Request.Method.GET, url,
                     Response.Listener {
                         val zoomInProgress = it.toBoolean()
 
@@ -57,7 +58,11 @@ class MainActivity : AppCompatActivity() {
                         Log.e("DomenOnCall", "Error: $it")
                     })
 
-            queue.add(response)
+                queue.add(response)
+            } catch (e: Exception) {
+                // Ignore all exceptions, but print them to the log.
+                Log.e("DomenOnCall", "Got an unexpected error", e)
+            }
         }
     }
 
